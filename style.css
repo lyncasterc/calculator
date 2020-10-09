@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Open+Sans:wght@300&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html,body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2a2620;
+}
+#calculator-container {
+    background-color: black;
+    width: 390px;
+    height: 700px;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+
+}
+
+#calc-btns{
+    height: 60%;
+    width: 100%;
+    /* background-color: green; */
+    display: flex;
+    flex-flow: row wrap;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    
+}
+#calc-btns div{
+    margin-bottom: 10px;
+}
+
+#calc-btns div input[type=button]{
+    width: 70px;
+    height: 70px;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    margin-right: 10px;
+    font-size: 2rem;
+    cursor: pointer !important;
+    appearance: none !important;
+    transition: all 200ms ease;
+
+}
+#calc-btns div input[type=button]:hover{
+    box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.345)
+}
+#calc-btns div input[type=button]:active{
+    box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.406)
+
+}
+
+#zero-btn{
+    /* display: none */
+    flex: 2 !important;
+    width: 153px !important;
+    border-radius: 55px !important;
+    text-align: left;
+    padding-left: 28px
+}
+
+#sub-btn{
+    font-size: 3rem !important;
+    padding-bottom: 5px !important;
+}
+#div-btn{
+    font-size: 2.5rem !important;
+
+}
+
+.numbers { 
+    background-color: #333333 !important;
+    color: white !important;
+}
+
+.operations, #equal-btn {
+    background-color: #fe9f06 !important;
+    color: white !important;
+
+}
+
+.misc{
+    background-color: #a5a5a5 !important;
+}
+
+#display-container{
+    
+    width: 100%;
+    text-align: right;
+    /* background-color: green; */
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    text-align: right !important;
+    font-size: 5rem;
+    font-weight: 100;
+    /* left: 45px; */
+
+
+}
+
+.display{
+    margin-right: 52px;
+}
