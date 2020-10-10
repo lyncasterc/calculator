@@ -106,38 +106,58 @@ function operations(){
 render_display()
 
 
-
-
 neg_btn.addEventListener('click',function(){
     //adding - when typing a number
     if(!str_val.includes('-') && display.textContent !== '0' && values.length!== 1){
         str_val = '-' + str_val
+        render_display(str_val)
+    } 
+    //removes negative sign 
+    else if(str_val.includes('-') && display.textContent !== '0' &&display.textContent!=='-0' && values.length!== 1 ){
+        str_val = str_val.replace('-','')
         render_display(str_val)
     }
     //adding a - when pressed on clear or new session
     if(display.textContent === '0'){
         str_val = '-' + str_val
         display.textContent = '-' + '0'
+    } 
+    //removes negative sign
+    else if ( display.textContent === '-0'){
+        display.textContent = '0'
+        str_val = ''
     }
 
     //adding a - to result of calcution
         //bug: can add multile -'s
-    if (values.length === 1) {
+    if (values.length === 1 && !values[0].toString().includes('-')) {
         values[0] = '-' + values[0]
         render_display(values[0])
-        
+    }
+    else if(values.length === 1 && values[0].toString().includes('-')){
+        values[0] = values[0].toString().replace('-','')
+        render_display(values[0])
     }
 
 })
 
 numbers_btn.forEach(btn => {
     btn.addEventListener('click',function(){
-        if (values.length === 1){
-            values = []
+        if(btn.id === 'zero-btn' && display.textContent === '0'){
+            //pass
         }
-
-        str_val+=this.value
-        render_display(str_val)
+        else if(btn.id === 'zero-btn' && display.textContent === '-0'){
+            //pass
+        }
+        else {
+            if (values.length === 1){
+                values = []
+            }
+            str_val+=this.value
+            render_display(str_val)
+        }
+        
+    
     })
 });
 
