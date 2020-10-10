@@ -90,6 +90,11 @@ html,body{
 
 }
 
+.selected-operations {
+    background-color: #fff !important;
+    color: #fe9f06 !important;
+}
+
 .misc{
     background-color: #a5a5a5 !important;
 }

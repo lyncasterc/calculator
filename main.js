@@ -14,7 +14,6 @@ let last_operation = null
 let last_num = null
 
 
-
 function clear_display(){
 
     clear_btn.addEventListener('click', function(){
@@ -22,13 +21,102 @@ function clear_display(){
         str_val = ''
         last_num = null
         last_operation = null
+        this.value = 'AC'
+        display.style.cssText = 'font-size: 5rem !important;'
+
+        operation_btns.forEach(btn => {
+            btn.classList.remove('selected-operations')
+        });
+
         render_display()
         
     })   
 }
 function render_display(display_text=0){
+    let numbers = null
     display.textContent = ''
     display.textContent = display_text
+
+    if(display.textContent.length === 4){
+
+        if (display.textContent.includes('.')){
+            //pass
+        }else{
+            numbers = display.textContent.split('')
+            numbers.splice(1,0,',')
+            display.textContent = numbers.join('')
+        }
+    }
+
+    else if(display.textContent.length === 5){
+
+        if (display.textContent.includes('.')){
+            //pass
+        }
+
+        else{
+            numbers = display.textContent.split('')
+            numbers.splice(2,0,',')
+            display.textContent = numbers.join('')
+        }
+
+    }
+    else if(display.textContent.length === 6){
+
+        if (display.textContent.includes('.')){
+            //pass
+        }
+        else{
+            numbers = display.textContent.split('')
+            numbers.splice(3,0,',')
+            display.textContent = numbers.join('')
+        }
+
+    }
+    else if(display.textContent.length === 7){
+
+        if (display.textContent.includes('.')){
+            //pass
+        }
+        else{
+            numbers = display.textContent.split('')
+            numbers.splice(1,0,',')
+            numbers.splice(5,0,',')
+            display.textContent = numbers.join('')
+        }
+        display.style.cssText = 'font-size: 4.2rem !important;'
+
+    }
+    else if(display.textContent.length === 8){
+        
+        if (display.textContent.includes('.')){
+            //pass
+        }
+        else{
+            numbers = display.textContent.split('')
+            numbers.splice(2,0,',')
+            numbers.splice(6,0,',')
+            display.textContent = numbers.join('')
+        }
+
+        display.style.cssText = 'font-size: 3.8rem !important;'
+
+    }
+    else if(display.textContent.length === 9){
+
+        if (display.textContent.includes('.')){
+            //pass
+        }
+        else{
+            numbers = display.textContent.split('')
+            numbers.splice(3,0,',')
+            numbers.splice(7,0,',')
+            display.textContent = numbers.join('')
+        }
+        display.style.cssText = 'font-size: 3.3rem !important;'
+
+    }
+
 }
 function multiplication() {
     while(values.includes('x')){
@@ -51,7 +139,7 @@ function division() {
         a = Number(values[i-1])
         b = Number(values[i+1])
     
-        result=(a/b)
+        result=(a/b).toPrecision(8)
     
         values.splice(i-1,i+2,result)
 
@@ -95,16 +183,10 @@ function operations(){
     division()
     addition()
     subtraction()
-    
-
 
     return values[0]
-
     
 }
-
-render_display()
-
 
 neg_btn.addEventListener('click',function(){
     //adding - when typing a number
@@ -143,26 +225,52 @@ neg_btn.addEventListener('click',function(){
 
 numbers_btn.forEach(btn => {
     btn.addEventListener('click',function(){
+
+        clear_btn.value = 'C'
+        //preventing multiple zeros
         if(btn.id === 'zero-btn' && display.textContent === '0'){
             //pass
         }
         else if(btn.id === 'zero-btn' && display.textContent === '-0'){
             //pass
         }
+
+        else if(btn.id === 'dec-btn'){
+            if(display.textContent === '0' || values.length === 1){
+                str_val = '0.'
+                render_display(str_val)
+            }
+            else if(display.textContent === '-0'){
+                str_val = '-0.'
+                render_display(str_val)
+            }
+            else if (!str_val.includes('.')){
+                str_val += '.'
+                render_display(str_val)
+                
+            }
+        
+        }
+
         else {
             if (values.length === 1){
                 values = []
             }
             str_val+=this.value
+            operation_btns.forEach(btn => {
+                btn.classList.remove('selected-operations')
+            });
             render_display(str_val)
-        }
-        
+        }   
+    
     
     })
 });
 
 operation_btns.forEach(btn => {
     btn.addEventListener('click',function(){
+        btn.classList.add('selected-operations')
+
         
         if (str_val.length !== 0){
             values.push(str_val)
@@ -176,13 +284,13 @@ operation_btns.forEach(btn => {
                 //pass
             }
             else{
-                values.push(this.value)
+                values.push(this.value) 
+
             }
             
         }
     })
 });
-
 
 equal_btn.addEventListener('click', function(){
     
@@ -225,7 +333,5 @@ percent_btn.addEventListener('click',function(){
 
 })
 
-
-
-
 clear_display()
+render_display()
